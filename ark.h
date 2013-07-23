@@ -1,0 +1,37 @@
+#pragma once
+
+#include <list>
+
+#include <SDL2/SDL.h>
+#include "entity.h"
+
+class Ark {
+    private:
+        SDL_Renderer *renderer;
+        SDL_Event event;
+
+        bool running = true;
+
+        int fps_target = 1000.0f/60;
+        int start = 0;
+        int delay;
+
+        Paddle *paddle;
+        Ball *ball;
+
+        std::list<Block*> block_list;
+
+    public:
+        SDL_Window *window;
+
+        Ark();
+        void quit();
+
+        void tick();
+        void render();
+
+        void ball_collide();
+
+        void event_handler();
+        void loop();
+};
