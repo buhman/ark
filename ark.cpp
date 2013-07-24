@@ -162,6 +162,7 @@ void Ark::ball_collide() {
 
             if (ball->collision(*i)) {
 
+                delete *i;
                 block_list.erase(i++);
                 std::cout << "blockc" << std::endl;
             }
