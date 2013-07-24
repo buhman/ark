@@ -1,6 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include <list>
+#include <sstream>
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
@@ -71,7 +72,10 @@ void Ark::render() {
     SDL_Surface *s;
     SDL_Texture *t;
 
-    s = TTF_RenderText_Blended(font, "hello world", c);
+    char n[21];
+    sprintf(n, "score: %d", score);
+
+    s = TTF_RenderText_Blended(font, n, c);
 
     SDL_Rect SrcR = {0, 0, s->w, s->h};
     SDL_Rect DestR = {
@@ -162,6 +166,7 @@ void Ark::ball_collide() {
 
             if (ball->collision(*i)) {
 
+                score++;
                 delete *i;
                 block_list.erase(i++);
                 std::cout << "blockc" << std::endl;

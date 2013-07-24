@@ -23,6 +23,8 @@ class Ark {
 
         std::list<Block*> block_list;
 
+        int score = 0;
+
     public:
         SDL_Window *window;
 
