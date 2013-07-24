@@ -19,6 +19,8 @@ class Ark {
         Paddle *paddle;
         Ball *ball;
 
+        TTF_Font *font;
+
         std::list<Block*> block_list;
 
     public:

@@ -3,6 +3,7 @@
 #include <list>
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 
 #include "ark.h"
 #include "entity.h"
@@ -10,6 +11,7 @@
 Ark::Ark() {
 
     SDL_Init(SDL_INIT_VIDEO);
+    TTF_Init();
 
     window = SDL_CreateWindow(
         "ark",
@@ -21,13 +23,17 @@ Ark::Ark() {
     );
 
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    
+    if (!(font = TTF_OpenFont("freesans.ttf", 16))) {
+        std::cout << TTF_GetError() << std::endl;
+        running = 0;
+    }
 
     paddle = new Paddle(renderer, 220, 450, 100, 10);
 
     ball = new Ball(renderer, 220, 240, 8, 8);
     ball->x_vel = 2;
     ball->y_vel = 3;
-
 
     for (int i = 0; i < 10; i++) {
         
@@ -60,6 +66,23 @@ void Ark::render() {
     paddle->draw();
     ball->update();
     ball->draw();
+
+    SDL_Color c = {255,255,255,255};
+    SDL_Surface *s;
+    SDL_Texture *t;
+
+    s = TTF_RenderText_Blended(font, "hello world", c);
+
+    SDL_Rect SrcR = {0, 0, s->w, s->h};
+    SDL_Rect DestR = {
+        640 / 2 - s->w / 2,
+        480 / 2 - s->h / 2,
+        s->w, s->h};
+
+    t = SDL_CreateTextureFromSurface(renderer, s);
+    SDL_FreeSurface(s);
+    SDL_RenderCopy(renderer, t, &SrcR, &DestR);
+    SDL_DestroyTexture(t);
 
     SDL_RenderPresent(renderer);
 }
