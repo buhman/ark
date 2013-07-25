@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SDL2/SDL.h"
+#include "SDL.h"
 
 class Entity {
     protected:
@@ -13,7 +13,7 @@ class Entity {
         int width, height;
         
     public:
-        float x_vel = 0, y_vel = 0;
+        float x_vel, y_vel;
         Entity(SDL_Renderer*, int, int, int, int);
 
         void update();

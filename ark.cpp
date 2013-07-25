@@ -2,16 +2,24 @@
 #include <algorithm>
 #include <list>
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
+#include <SDL.h>
+//#include <SDL_ttf.h>
 
 #include "ark.h"
 #include "entity.h"
 
 Ark::Ark() {
 
+    running = true;
+    smooth_fps = 60.f;
+    fps_target = 1000.0f/60;
+
+    score=0;
+    lives=3;
+    level_size=10;
+
     SDL_Init(SDL_INIT_VIDEO);
-    TTF_Init();
+    //TTF_Init();
 
     window = SDL_CreateWindow(
         "ark",
@@ -24,10 +32,10 @@ Ark::Ark() {
 
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     
-    if (!(font = TTF_OpenFont("freesans.ttf", 16))) {
-        std::cout << TTF_GetError() << std::endl;
-        running = 0;
-    }
+    //if (!(font = TTF_OpenFont("freesans.ttf", 16))) {
+    //    std::cout << TTF_GetError() << std::endl;
+    //    running = 0;
+    //}
 
     paddle = new Paddle(renderer, 220, 450, 100, 10);
 
@@ -97,19 +105,19 @@ void Ark::render() {
 
 void Ark::hud(char* text, int x, int y) {
 
-    SDL_Color c = {255,255,255,255};
-    SDL_Surface *s;
-    SDL_Texture *t;
+    //SDL_Color c = {255,255,255,255};
+    //SDL_Surface *s;
+    //SDL_Texture *t;
 
-    s = TTF_RenderText_Blended(font, text, c);
+    //s = TTF_RenderText_Blended(font, text, c);
 
-    SDL_Rect SrcR = {0, 0, s->w, s->h};
-    SDL_Rect DestR = {x, y, s->w, s->h};
+    //SDL_Rect SrcR = {0, 0, s->w, s->h};
+    //SDL_Rect DestR = {x, y, s->w, s->h};
 
-    t = SDL_CreateTextureFromSurface(renderer, s);
-    SDL_FreeSurface(s);
-    SDL_RenderCopy(renderer, t, &SrcR, &DestR);
-    SDL_DestroyTexture(t);
+    //t = SDL_CreateTextureFromSurface(renderer, s);
+    //SDL_FreeSurface(s);
+    //SDL_RenderCopy(renderer, t, &SrcR, &DestR);
+    //SDL_DestroyTexture(t);
 }
 
 void Ark::event_handler() {

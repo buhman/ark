@@ -2,7 +2,7 @@
 
 #include <list>
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include "entity.h"
 
 class Ark {
@@ -10,24 +10,24 @@ class Ark {
         SDL_Renderer *renderer;
         SDL_Event event;
 
-        bool running = true;
+        bool running ;
 
-        float smooth_fps = 60.f;
-        float fps_target = 1000.0f/60;
-        int start = 0;
+        float smooth_fps;
+        float fps_target;
+        int start;
         int delay;
 
         Paddle *paddle;
         Ball *ball;
 
-        TTF_Font *font;
+        //TTF_Font *font;
 
         std::list<Block*> block_list;
 
-        int score = 0;
-        int lives = 3;
+        int score;
+        int lives;
 
-        int level_size = 10;
+        int level_size;
 
     public:
         SDL_Window *window;
