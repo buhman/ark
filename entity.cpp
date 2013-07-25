@@ -7,6 +7,9 @@ Entity::Entity(SDL_Renderer *renderer, int x, int y, int width, int height) :
     renderer(renderer), 
     x(x), y(y), 
     width(width), height(height) {
+
+        x_vel = 0;
+        y_vel = 0;
 }
 
 void Entity::update() {

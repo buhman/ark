@@ -1,7 +1,7 @@
 TARGET = ark
 LIBS = -lSDL2 -lSDL2_gfx -lSDL2_ttf
 CC = g++
-CFLAGS = -g -Wall -std=gnu++11 -O3
+CFLAGS = -g -Wall -O3
 
 .PHONY: clean all default
 

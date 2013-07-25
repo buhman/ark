@@ -10,6 +10,11 @@
 
 Ark::Ark() {
 
+    running = true;
+    score = 0;
+    lives = 3;
+    level_size = 10;
+
     SDL_Init(SDL_INIT_VIDEO);
     TTF_Init();
 
