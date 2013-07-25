@@ -167,6 +167,8 @@ void Ark::ball_collide() {
 
             if (ball->collision(*i)) {
 
+                ball->y_vel = -ball->y_vel;
+
                 score++;
                 delete *i;
                 block_list.erase(i++);
