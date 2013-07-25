@@ -32,9 +32,9 @@ Ark::Ark() {
 
     paddle = new Paddle(renderer, 220, 450, 100, 10);
 
-    ball = new Ball(renderer, 220, 240, 8, 8);
+    ball = new Ball(renderer, 200, 200, 8, 8);
     ball->x_vel = 2;
-    ball->y_vel = 3;
+    ball->y_vel = 2;
 
     for (int i = 0; i < 10; i++) {
         

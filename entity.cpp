@@ -28,11 +28,16 @@ bool Entity::collision(Entity *e) {
     int x_min = std::min(x, x + x_vel);
     int y_min = std::min(y, y + y_vel);
 
-    bool x_o = overlap(x_min, e->x, e->x + e->width) ||
-                     overlap(e->x, x_min, x_max + width);
+    int ex_max = std::max(e->x, e->x + x_vel);
+    int ey_max = std::max(e->y, e->y + y_vel);
+    int ex_min = std::min(e->x, e->x + x_vel);
+    int ey_min = std::min(e->y, e->y + y_vel);
 
-    bool y_o = overlap(y_min, e->y, e->y + e->height) ||
-                     overlap(e->y, y_min, y_max + height);
+    bool x_o = overlap(x_min, ex_min, ex_max + e->width) ||
+                     overlap(ex_min, x_min, x_max + width);
+
+    bool y_o = overlap(y_min, ey_min, ey_max + e->height) ||
+                     overlap(ey_min, y_min, y_max + height);
 
     return x_o && y_o;
 }
