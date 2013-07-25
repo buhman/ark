@@ -12,7 +12,8 @@ class Ark {
 
         bool running = true;
 
-        int fps_target = 1000.0f/60;
+        float smooth_fps = 60.f;
+        float fps_target = 1000.0f/60;
         int start = 0;
         int delay;
 

@@ -56,8 +56,13 @@ void Ark::quit() {
 void Ark::tick() {
 
     delay = fps_target - (SDL_GetTicks() - start);
+
     if (delay > 0)
         SDL_Delay((uint32_t)delay);
+
+    smooth_fps = smooth_fps * 0.99 + 
+        (1000.f / (SDL_GetTicks() - start)) * 0.01;
+
     start = SDL_GetTicks();
 }
 
@@ -80,9 +85,12 @@ void Ark::render() {
         hud(n, 5, 0);
 
         n[0] = 0;
-
         sprintf(n, "lives: %d", lives);
         hud(n, 5, 16);
+
+        n[0] = 0;
+        sprintf(n, "fps: %.1f", smooth_fps);
+        hud(n, 5, 32);
     }
 
     SDL_RenderPresent(renderer);
