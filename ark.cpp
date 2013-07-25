@@ -35,8 +35,13 @@ Ark::Ark() {
     ball = new Ball(renderer, 200, 200, 8, 8);
     ball->x_vel = 2;
     ball->y_vel = 2;
+    
+    new_level();
+}
 
-    for (int i = 0; i < 10; i++) {
+void Ark::new_level() {
+
+    for (int i = 0; i < level_size; i++) {
         
         block_list.push_front(new Block(renderer));
     }
@@ -172,6 +177,12 @@ void Ark::ball_collide() {
                 score++;
                 delete *i;
                 block_list.erase(i++);
+
+                if (block_list.size() == 0) {
+
+                    level_size++;
+                    new_level();
+                }
             }
 
             ++i;

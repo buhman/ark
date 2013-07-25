@@ -26,6 +26,8 @@ class Ark {
         int score = 0;
         int lives = 3;
 
+        int level_size = 10;
+
     public:
         SDL_Window *window;
 
@@ -41,4 +43,6 @@ class Ark {
 
         void event_handler();
         void loop();
+
+        void new_level();
 };
