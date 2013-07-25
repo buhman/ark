@@ -103,11 +103,6 @@ void Ark::event_handler() {
                     case SDLK_d:
                         paddle->x_vel = 3;
                         break;
-                    case SDLK_w:
-                        paddle->y_vel = -3;
-                        break;
-                    case SDLK_s:
-                        paddle->y_vel = 3;
                 }
             }
             break;
@@ -123,14 +118,6 @@ void Ark::event_handler() {
                         if (paddle->x_vel > 0)
                             paddle->x_vel = 0;
                         break;
-                    case SDLK_w:
-                        if (paddle->y_vel < 0)
-                            paddle->y_vel = 0;
-                        break;
-                    case SDLK_s:
-                        if (paddle->y_vel > 0)
-                            paddle->y_vel = 0;
-                        break;
                 }
             }
             break;
@@ -145,17 +132,10 @@ void Ark::ball_collide() {
 
     {
         if (ball->collision(paddle)) {
-            
-            if (ball->x_vel > ball->y_vel) {
-                ball->x_vel = -ball->x_vel;
-            }
-            else if (ball->x_vel < ball->y_vel) {
-                ball->y_vel = -ball->y_vel;
-            } 
-            else {
-                ball->x_vel = -ball->x_vel;
-                ball->y_vel = -ball->y_vel;
-            }
+ 
+            ball->y_vel = -ball->y_vel;
+
+            ball->x_vel = ball->x_vel + (0.5 * paddle->x_vel);
         }
     }
 
@@ -169,7 +149,6 @@ void Ark::ball_collide() {
                 score++;
                 delete *i;
                 block_list.erase(i++);
-                std::cout << "blockc" << std::endl;
             }
 
             ++i;

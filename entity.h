@@ -7,13 +7,13 @@ class Entity {
         SDL_Renderer *renderer;
 
     public:
-        int x, y;
+        float x, y;
 
     protected:
         int width, height;
         
     public:
-        int x_vel = 0, y_vel = 0;
+        float x_vel = 0, y_vel = 0;
         Entity(SDL_Renderer*, int, int, int, int);
 
         void update();
