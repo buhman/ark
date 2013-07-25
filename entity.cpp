@@ -73,7 +73,7 @@ void Ball::update() {
 }
 
 Block::Block(SDL_Renderer *renderer) : 
-    Entity::Entity(renderer, rand() % 300 + 20, rand() % 440 + 20, 50, 12) {
+    Entity::Entity(renderer, rand() % 600 + 20, rand() % 300 + 20, 50, 12) {
 }
 
 void Block::draw() {
