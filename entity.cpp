@@ -1,7 +1,6 @@
 #include <algorithm>
 
 #include "SDL2/SDL.h"
-#include "SDL2/SDL2_gfxPrimitives.h"
 #include "entity.h"
 
 Entity::Entity(SDL_Renderer *renderer, int x, int y, int width, int height) : 
@@ -42,13 +41,20 @@ bool Entity::collision(Entity *e) {
     return x_o && y_o;
 }
 
+void Entity::draw() {
+
+    SDL_Rect r = {(int)x, (int)y, width, height};
+    SDL_RenderDrawRect(renderer, &r);
+}
+
 Paddle::Paddle(SDL_Renderer *renderer, int x, int y, int width, int height) :
     Entity::Entity(renderer, x, y, width, height) {
 }
 
 void Paddle::draw() {
 
-    rectangleRGBA(renderer, x, y, x+width, y+height, 0, 0, 255, 255);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+    Entity::draw();
 }
 
 Ball::Ball(SDL_Renderer *renderer, int x, int y, int width, int height) :
@@ -57,7 +63,8 @@ Ball::Ball(SDL_Renderer *renderer, int x, int y, int width, int height) :
 
 void Ball::draw() {
 
-    aacircleRGBA(renderer, x, y, width, 255, 255, 0, 255);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+    Entity::draw();
 }
 
 void Ball::update() {
@@ -78,5 +85,6 @@ Block::Block(SDL_Renderer *renderer) :
 
 void Block::draw() {
 
-    rectangleRGBA(renderer, x, y, x+width, y+height, 0, 255, 0, 255);
+    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+    Entity::draw();
 }

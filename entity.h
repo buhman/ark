@@ -17,6 +17,7 @@ class Entity {
         Entity(SDL_Renderer*, int, int, int, int);
 
         void update();
+        void draw();
 
         bool overlap(int, int, int);
         bool collision(Entity*);

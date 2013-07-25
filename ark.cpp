@@ -1,7 +1,6 @@
 #include <iostream>
 #include <algorithm>
 #include <list>
-#include <sstream>
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
