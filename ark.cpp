@@ -68,27 +68,36 @@ void Ark::render() {
     ball->update();
     ball->draw();
 
+    {
+        char n[21];
+
+        sprintf(n, "score: %d", score);
+        hud(n, 5, 0);
+
+        n[0] = 0;
+
+        sprintf(n, "lives: %d", lives);
+        hud(n, 5, 16);
+    }
+
+    SDL_RenderPresent(renderer);
+}
+
+void Ark::hud(char* text, int x, int y) {
+
     SDL_Color c = {255,255,255,255};
     SDL_Surface *s;
     SDL_Texture *t;
 
-    char n[21];
-    sprintf(n, "score: %d", score);
-
-    s = TTF_RenderText_Blended(font, n, c);
+    s = TTF_RenderText_Blended(font, text, c);
 
     SDL_Rect SrcR = {0, 0, s->w, s->h};
-    SDL_Rect DestR = {
-        640 / 2 - s->w / 2,
-        480 / 2 - s->h / 2,
-        s->w, s->h};
+    SDL_Rect DestR = {x, y, s->w, s->h};
 
     t = SDL_CreateTextureFromSurface(renderer, s);
     SDL_FreeSurface(s);
     SDL_RenderCopy(renderer, t, &SrcR, &DestR);
     SDL_DestroyTexture(t);
-
-    SDL_RenderPresent(renderer);
 }
 
 void Ark::event_handler() {
@@ -136,6 +145,18 @@ void Ark::ball_collide() {
             ball->y_vel = -ball->y_vel;
 
             ball->x_vel = ball->x_vel + (0.5 * paddle->x_vel);
+        }
+    }
+
+    {
+        if (ball->y + ball->y_vel > 480) {
+
+            lives--;
+
+            ball->y = 200;
+            ball->x = 200;
+            ball->y_vel = 2;
+            ball->x_vel = 2;
         }
     }
 

@@ -24,6 +24,7 @@ class Ark {
         std::list<Block*> block_list;
 
         int score = 0;
+        int lives = 3;
 
     public:
         SDL_Window *window;
@@ -33,6 +34,8 @@ class Ark {
 
         void tick();
         void render();
+
+        void hud(char*, int, int);
 
         void ball_collide();
 

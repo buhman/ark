@@ -65,7 +65,7 @@ void Ball::update() {
     if (x + x_vel <= 0 || x + x_vel + width >= 640) {
         x_vel = -x_vel;
     }
-    if (y + y_vel <= 0 || y + y_vel + height >= 480) {
+    if (y + y_vel <= 0) {
         y_vel = -y_vel;
     }
 
