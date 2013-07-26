@@ -23,7 +23,7 @@ For archlinux, you can find both in the AUR: [aur/sdl2][], [aur/sdl2-ttf][]
 [aur/sdl2]: https://aur.archlinux.org/packages/sdl2/
 [aur/sdl2-ttf]: https://aur.archlinux.org/packages/sdl2-ttf/
 
-Once the dependencies are installed, (along with `glibc`, `gcc`, and
+Once the dependencies are installed, (along with `glibc`, `libstdc++`, `gcc`, and
 `make`) you'll be able to build ark.
 
 building
