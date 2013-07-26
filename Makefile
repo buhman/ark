@@ -1,5 +1,5 @@
 TARGET = ark
-LIBS = -lSDL2 -lSDL2_gfx -lSDL2_ttf
+LIBS = -lSDL2 -lSDL2_ttf
 CC = g++
 CFLAGS = -g -Wall -O3
 
