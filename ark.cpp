@@ -120,6 +120,9 @@ void Ark::hud(char* text, int x, int y) {
 void Ark::event_handler() {
 
     switch (event.type) {
+        case SDL_MOUSEMOTION:
+            paddle->x = event.motion.x - 50;
+            break;
         case SDL_KEYDOWN:
             if (event.key.repeat == 0) { // ignore repeated keys
                 switch(event.key.keysym.sym) {
