@@ -10,7 +10,7 @@ class Ark {
         SDL_Renderer *renderer;
         SDL_Event event;
 
-        const static float fps_target = 1000.0f/60;
+        const float fps_target = 1000.f/60.f;
 
         bool running;
 

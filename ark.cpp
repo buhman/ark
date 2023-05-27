@@ -1,5 +1,6 @@
 #include <iostream>
 #include <algorithm>
+#include <functional>
 #include <list>
 
 #include <SDL2/SDL.h>
@@ -39,6 +40,8 @@ Ark::Ark() {
     ball = new Ball(renderer, 200, 200, 8, 8);
     ball->x_vel = 2;
     ball->y_vel = 2;
+
+    smooth_fps = fps_target;
     
     new_level();
 }
@@ -64,8 +67,8 @@ void Ark::tick() {
     if (delay > 0)
         SDL_Delay((uint32_t)delay);
 
-    smooth_fps = smooth_fps * 0.99 + 
-        (1000.f / (SDL_GetTicks() - start)) * 0.01;
+    smooth_fps = smooth_fps * 0.9 +
+        (1000.f / (SDL_GetTicks() - start)) * 0.1;
 
     start = SDL_GetTicks();
 }
@@ -75,7 +78,10 @@ void Ark::render() {
     SDL_SetRenderDrawColor(renderer, 40, 40, 40, 255);
     SDL_RenderClear(renderer);
 
-    std::for_each(block_list.begin(), block_list.end(), std::mem_fun(&Block::draw));
+    using namespace std::placeholders;
+
+    std::for_each(block_list.begin(), block_list.end(),
+		  std::bind(&Block::draw, _1));
 
     paddle->update();
     paddle->draw();
@@ -83,17 +89,17 @@ void Ark::render() {
     ball->draw();
 
     {
-        char n[21];
+        char n[64];
 
-        sprintf(n, "score: %d", score);
+        snprintf(n, (sizeof (n)), "score: %d", score);
         hud(n, 5, 0);
 
         n[0] = 0;
-        sprintf(n, "lives: %d", lives);
+        snprintf(n, (sizeof (n)), "lives: %d", lives);
         hud(n, 5, 16);
 
         n[0] = 0;
-        sprintf(n, "fps: %.1f", smooth_fps);
+        snprintf(n, (sizeof (n)), "fps: %.1f", smooth_fps);
         hud(n, 5, 32);
     }
 
@@ -217,7 +223,7 @@ void Ark::loop() {
     }
 }
 
-int main(int argc, char* argv[]) {
+int main() {
 
     Ark game;
 
